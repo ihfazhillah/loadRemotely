@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import rp from "request-promise";
+const ReactRouter = require("react-router-dom");
+
+const Nav = props => {
+  return null;
+};
 
 class App extends Component {
   constructor(props) {
@@ -14,22 +19,30 @@ class App extends Component {
   loadComponent() {
     let url =
       "https://gist.githubusercontent.com/ihfazhillah/6053095daec61c24d19d49779d1a4236/raw/f3930825c8e3169ff6d351d8fd67001a8b39bff4/postlist.js";
+    url = "https://shopkeeper-lionel-47443.netlify.com/single.min.js";
     return rp(url);
   }
 
   componentDidMount() {
+    window.react = React;
+    window.router = ReactRouter;
     this.loadComponent().then(src => {
       const exports = {};
       function require(name) {
         if (name === "react") return React;
-        else throw "hello world";
+        if (name === "react-router") return ReactRouter;
       }
       eval(src);
+      debugger;
 
-      this.setState({ comp: exports.__esModule ? exports.default : exports });
+      this.setState({ comp: exports.__esModule ? exports : exports });
     });
   }
   render() {
+    const theMenu = () => {
+      return <Nav menuItems={[]} />;
+    };
+
     return (
       <div className="App">
         <header className="App-header">
@@ -40,9 +53,10 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         {this.state.comp && (
-          <this.state.comp
-            title="Hello world"
-            content="ini adalah percobaan, apakah kemudian akan berhasil????"
+          <this.state.comp.Single
+            postData={{}}
+            theConfig={{}}
+            theMenu={theMenu}
           />
         )}
       </div>
