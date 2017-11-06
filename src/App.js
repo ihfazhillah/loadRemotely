@@ -12,7 +12,11 @@ window["react-router"] = ReactRouter;
 var req = require;
 
 const Nav = props => {
-  return null;
+  return (
+    <ul>
+      <li>a</li>
+    </ul>
+  );
 };
 
 class App extends React.Component {
@@ -29,7 +33,7 @@ class App extends React.Component {
     let url =
       "https://gist.githubusercontent.com/ihfazhillah/6053095daec61c24d19d49779d1a4236/raw/f3930825c8e3169ff6d351d8fd67001a8b39bff4/postlist.js";
     url = "https://shopkeeper-lionel-47443.netlify.com/single.min.js";
-    url = "https://shopkeeper-lionel-47443.netlify.com/dist/stellar.js";
+    //    url = "https://shopkeeper-lionel-47443.netlify.com/dist/stellar.js";
     return rp(url);
   }
 
@@ -67,17 +71,10 @@ class App extends React.Component {
       <ReactRouter.BrowserRouter>
         <div className="App">
           <Script
-            url="https://shopkeeper-lionel-47443.netlify.com/stellar.js"
+            url="https://59ffa3d3a6188f1d60f856af--shopkeeper-lionel-47443.netlify.com/stellar.js"
             onError={() => {}}
             onLoad={this.onLoad}
           />
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to React</h1>
-          </header>
-          <p className="App-intro">
-            To get started, edit <code>src/App.js</code> and save to reload.
-          </p>
           {this.state.comp && (
             <this.state.comp.Home
               postData={{}}
